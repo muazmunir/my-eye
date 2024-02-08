@@ -14,5 +14,20 @@ class DeviceController extends Controller
 
         return response()->json(['devices' => $devices]);
     }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+        ]);
+
+        $device = Device::create([
+            'name' => $request->name,
+            'model' => $request->model,
+        ]);
+
+        return response()->json(['message' => 'Device registered successfully', 'device' => $device]);
+    }
     
 }
