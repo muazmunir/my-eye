@@ -27,15 +27,18 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::post('/password/email', [AuthController::class, 'sendResetLinkEmail']);
 Route::post('/password/reset', [AuthController::class, 'reset']);
 
-Route::get('/devices', [DeviceController::class, 'index']);
-Route::post('/devices', [DeviceController::class, 'register']);
 
-Route::post('/devices/{id}/current-location', [DeviceDataController::class, 'postCurrentLocation']);
-Route::get('/devices/{id}/location-history', [DeviceDataController::class, 'getLocationHistory']);
-// Route::get('/devices/{id}/geofencing-alerts', [DeviceDataController::class, 'getGeofencingAlerts']);
-Route::post('/devices/{id}/messages-logs', [DeviceDataController::class, 'storeMessageLogs']);
-Route::get('/devices/{id}/messages-logs', [DeviceDataController::class, 'getMessagesLogs']);
-Route::post('/devices/{id}/call-logs', [DeviceDataController::class, 'storeCallLogs']);
-Route::get('/devices/{id}/call-logs', [DeviceDataController::class, 'getCallLogs']);
-Route::post('/devices/{id}/gallery-entries', [DeviceDataController::class, 'storeGalleryEntry']);
-Route::get('/devices/{id}/gallery-entries', [DeviceDataController::class, 'fetchGalleryEntries']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/devices', [DeviceController::class, 'index']);
+    Route::post('/devices', [DeviceController::class, 'register']);
+
+    Route::post('/devices/{id}/current-location', [DeviceDataController::class, 'postCurrentLocation']);
+    Route::get('/devices/{id}/location-history', [DeviceDataController::class, 'getLocationHistory']);
+    // Route::get('/devices/{id}/geofencing-alerts', [DeviceDataController::class, 'getGeofencingAlerts']);
+    Route::post('/devices/{id}/messages-logs', [DeviceDataController::class, 'storeMessageLogs']);
+    Route::get('/devices/{id}/messages-logs', [DeviceDataController::class, 'getMessagesLogs']);
+    Route::post('/devices/{id}/call-logs', [DeviceDataController::class, 'storeCallLogs']);
+    Route::get('/devices/{id}/call-logs', [DeviceDataController::class, 'getCallLogs']);
+    Route::post('/devices/{id}/gallery-entries', [DeviceDataController::class, 'storeGalleryEntry']);
+    Route::get('/devices/{id}/gallery-entries', [DeviceDataController::class, 'fetchGalleryEntries']);
+});

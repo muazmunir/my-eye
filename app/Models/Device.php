@@ -13,6 +13,11 @@ class Device extends Model
         'name', 'model'
     ];
 
+    public function locations()
+    {
+        return $this->hasMany(DeviceLocation::class);
+    }
+
     public function callLogs()
     {
         return $this->hasMany(CallLog::class);

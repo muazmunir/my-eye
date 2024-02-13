@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class MessageLog extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'from', 'to', 'date_time'
+    ];
 }
