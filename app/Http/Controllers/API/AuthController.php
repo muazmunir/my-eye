@@ -31,7 +31,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Mail::to($user->email)->send(new ConfirmationEmail($user->name));
+        // Mail::to($user->email)->send(new ConfirmationEmail($user->name));
 
         return response()->json(['message' => 'User registered successfully', 'user' => $user]);
     }
